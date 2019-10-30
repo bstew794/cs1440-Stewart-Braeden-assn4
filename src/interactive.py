@@ -9,8 +9,7 @@ import sys
 from tkinter import Tk, Canvas, PhotoImage, mainloop
 
 
-# This color gradient contains 100 color steps.
-gradient = [
+GRADIENT = [
         '#ffe4b5', '#ffe5b2', '#ffe7ae', '#ffe9ab', '#ffeaa8', '#ffeda4',
         '#ffefa1', '#fff29e', '#fff49a', '#fff797', '#fffb94', '#fffe90',
         '#fcff8d', '#f8ff8a', '#f4ff86', '#f0ff83', '#ebff80', '#e7ff7c',
@@ -29,7 +28,9 @@ gradient = [
         '#003d88', '#003784', '#003181', '#002c7e', '#00277a', '#002277',
         ]
 
-MAX_ITERATIONS = len(gradient)
+BLACK = '#000000'
+SIDE = 640
+MAX_ITERATIONS = len(GRADIENT)
 z = 0
 
 
@@ -42,10 +43,10 @@ def colorOfThePixel(c, verbose=False):
     for i in range(MAX_ITERATIONS):
         z = z * z + c  # Get z1, z2, ...
         if verbose:
-            print(f"i={i+1}, Z={z}")
+            print(f"i={i+1:<2} abs(Z)={abs(z):=.5} Z={z}")
         if abs(z) > 2:
             if verbose:
-                print(f"Escaped on iteration #{i+1}! abs(Z)={abs(z)}\n")
+                print(f"Escaped on iteration #{i+1}! abs(Z)={abs(z):=.5} Z={z}\n")
             return i  # The sequence is unbounded
     if verbose:
         print(f"No escape after {MAX_ITERATIONS} iterations, I give up\n")
@@ -57,26 +58,43 @@ CELL_SIZE = 20
 
 def paintCell(event):
     col = (event.x // CELL_SIZE) * CELL_SIZE
-    row = 640 - ((event.y // CELL_SIZE) * CELL_SIZE)
+    row = SIDE - ((event.y // CELL_SIZE) * CELL_SIZE)
     x = minx + col * pixelsize
     y = miny + row * pixelsize
     count = colorOfThePixel(complex(x, y), verbose=True)
-    color = gradient[count]
+    color = GRADIENT[count]
     canvas = event.widget
-    canvas.create_rectangle(col, 640-row, col+CELL_SIZE, 640-row+CELL_SIZE, fill=color)
+    canvas.create_rectangle(col, SIDE-row, col+CELL_SIZE, SIDE-row+CELL_SIZE, fill=color)
 
 
 def paintEntireImage(event):
     """Paint the entire image"""
-    pixelsize = abs(maxx - minx) / 640
-    for row in range(640, -1, -CELL_SIZE):
-        for col in range(640, -1, -CELL_SIZE):
+    pixelsize = abs(maxx - minx) / SIDE
+    for row in range(SIDE, -1, -CELL_SIZE):
+        for col in range(SIDE, -1, -CELL_SIZE):
             x = minx + col * pixelsize
             y = miny + row * pixelsize
             count = colorOfThePixel(complex(x, y))
-            color = gradient[count]
-            canvas.create_rectangle(col, 640-row, col+CELL_SIZE, 640-row+CELL_SIZE, fill=color)
+            color = GRADIENT[count]
+            canvas.create_rectangle(col, SIDE-row, col+CELL_SIZE, SIDE-row+CELL_SIZE, fill=color)
 
+
+def resetImage(event):
+    """Reset the image to its initial color"""
+    canvas.create_rectangle(0, 0, SIDE, SIDE, fill=BLACK)
+
+
+def usage(event):
+    print("""Usage Instructions
+==================
+Click on the canvas to paint a cell and reveal the iteration count and the
+absolute value of Z computed by the escape-time algorithm at each step
+
+Right-click or press [Space] to reveal the entire image
+Press [R] to reset the image
+Press [Esc] to quit
+Press [H] to display this help message
+""")
 
 images = {
         'fullmandelbrot': {
@@ -138,24 +156,35 @@ minx = images[image]['centerX'] - (images[image]['axisLen'] / 2.0)
 maxx = images[image]['centerX'] + (images[image]['axisLen'] / 2.0)
 miny = images[image]['centerY'] - (images[image]['axisLen'] / 2.0)
 maxy = images[image]['centerY'] + (images[image]['axisLen'] / 2.0)
-pixelsize = abs(maxx - minx) / 640
+pixelsize = abs(maxx - minx) / SIDE
 
 
 # Set up the GUI so that we can paint the fractal image on the screen
 window = Tk()
 
-canvas = Canvas(window, width=640, height=640, bg=gradient[-1])
+canvas = Canvas(window, width=SIDE, height=SIDE, bg=BLACK)
 canvas.pack()
 
-# Paint the cell under the mouse cursor upon ordinary left click
+# Paint the cell under the mouse cursor or left click (Button-1)
 canvas.bind("<Button-1>", paintCell)
 
-# Display the entire image on the screen upon right click or spacebar
+# Display the entire image on the screen upon right click (Button-3) or spacebar
 canvas.bind("<Button-3>", paintEntireImage)
 window.bind("<space>", paintEntireImage)
 
-# Quit upon Esc
-window.bind("<Escape>", sys.exit)
+# Reset the image
+window.bind("<r>", resetImage)
+window.bind("<R>", resetImage)
 
+# Display usage information
+window.bind("<h>", usage)
+window.bind("<H>", usage)
+
+# Quit the program
+window.bind("<Escape>", sys.exit)
+window.bind("<q>", sys.exit)
+window.bind("<Q>", sys.exit)
+
+usage(None)
 
 mainloop()
