@@ -71,8 +71,8 @@
 
 * If you are *really* dying to know more about how it all works, the points
   *inside* the cardioid are the points *within* the Mandlebrot set.  These are
-  the coordinates on the imaginary plane corresponding to `Z` values which fail
-  to become greater than `2+0i` after repeated iterations.
+  the coordinates on the imaginary plane corresponding to `Z` values whose
+  absolute value fails to become greater than `2.0` after repeated iterations.
 
     * [UsefulJS] (http://usefuljs.net/fractals/docs/julia_mandelbrot.html) has
       a nice explanation of how the Mandelbrot set works and how the Julia set
