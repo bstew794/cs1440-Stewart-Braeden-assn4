@@ -70,7 +70,7 @@
 
 
 * If you are *really* dying to know more about how it all works, the points
-  *inside* the cardioid are the points *within* the Mandlebrot set.  These are
+  *inside* the cardioid are the points *within* the Mandelbrot set.  These are
   the coordinates on the imaginary plane corresponding to `Z` values whose
   absolute value fails to become greater than `2.0` after repeated iterations.
 
@@ -81,7 +81,7 @@
 
 * You can find ideas for new fractal configurations by exploring the Mandelbrot
   and Julia sets online.  You can also compare your program's output with other
-  Mandlebrot and Julia set visualizers to make sure that you haven't made any
+  Mandelbrot and Julia set visualizers to make sure that you haven't made any
   serious mistakes.
 
     * https://atopon.org/mandel/

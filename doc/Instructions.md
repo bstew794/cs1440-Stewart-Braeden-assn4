@@ -138,8 +138,8 @@ next sprint. For purposes of this diagram, a Python module is equivalent to a
 class.
 
 Commit your UML diagram in your repository under the  `doc/`  directory. If you
-made your diagram on draw.io, uncheck the "Transparent Background" option when
-you export your UML class diagram to a PNG image.
+made your diagram on https://draw.io, uncheck the "Transparent Background"
+option when you export your UML class diagram to a PNG image.
 
 
 ### Write a User's Manual Explaining How To Use Your Program

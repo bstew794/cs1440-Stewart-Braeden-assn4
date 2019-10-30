@@ -49,9 +49,9 @@ this manner.
 Next sprint this program will be made to accept the name of a fractal
 configuration file from the command-line so that one does not need to hack the
 source code each time they want to produce a new image.  The GUI team has
-translated the hardcoded fractal configurations into the sample configuration
-files you will find in the `data/` directory.  You may disregard these files
-in the first sprint of this project.
+translated the hard-coded fractal configurations into the sample configuration
+files you will find in the `data/` directory.  You may disregard these files in
+the first sprint of this project.
 
 
 
@@ -64,17 +64,16 @@ appeal.
 
 However, you will feel much more confident about this if you understand at
 least a little bit about what's going on.  To this end I have provided an
-interactive Mandelbrot program called `src/interactive.py`.
+interactive Mandelbrot program called [src/interactive.py](src/interactive.py).
 
 * Left-Clicking on its Canvas will paint a square region using the same
-  algorithm that the `src/mandelbrot.py` program uses, except this program will
-  print the values of the Z paramter at each iteration.
+  algorithm that the [src/mandelbrot.py](src/mandelbrot.py) program uses,
+  except this program will print the values of the Z parameter at each
+  iteration.
 
-* Right-Clicking the Canvas paints the entire image.
-
-Readaing its code and watching its output may help you better understand how
+Reading its code and watching its output may help you better understand how
 your program produces its images.
 
-**Important:** `src/interactive.py` is provided for your amusement/benefit.
-It is *not* a part of the assignment, and you *are not* required to improve it
-or document it.
+**Important:** [src/interactive.py](src/interactive.py) is provided for your
+amusement/benefit.  It is *not* a part of the assignment, and you *are not*
+required to improve it or document it.
