@@ -1,6 +1,6 @@
 #!/bin/env python3
 
-__gradient = [
+GRADIENT = [
     '#ffe4b5', '#ffe5b2', '#ffe7ae', '#ffe9ab', '#ffeaa8', '#ffeda4',
     '#ffefa1', '#fff29e', '#fff49a', '#fff797', '#fffb94', '#fffe90',
     '#fcff8d', '#f8ff8a', '#f4ff86', '#f0ff83', '#ebff80', '#e7ff7c',
@@ -18,11 +18,3 @@ __gradient = [
     '#00649c', '#005d98', '#005695', '#004f92', '#00498e', '#00438b',
     '#003d88', '#003784', '#003181', '#002c7e', '#00277a', '#002277',
 ]
-
-
-def getGradChart():
-    return __gradient
-
-
-def getColor(colorIndex):
-    return __gradient[colorIndex]

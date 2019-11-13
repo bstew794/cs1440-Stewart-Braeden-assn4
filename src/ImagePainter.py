@@ -1,54 +1,59 @@
 #!/bin/env python3
 from tkinter import Tk, Canvas, mainloop, PhotoImage
-from Gradient import getGradChart, getColor, __gradient
+from Gradient import GRADIENT
 from julia import getJuliaColorIndex
 from mandelbrot import getMandelIndex
 
+# This sets up the GUI that the program will display the fractal image onto
+__MAXPIXAMOUNT = 1024
 __window = Tk()
-__image = PhotoImage(width=1024, height=1024)
+__image = PhotoImage(width=__MAXPIXAMOUNT, height=__MAXPIXAMOUNT)
 
 
-def paint(fractals, fileName):
+def paint(configs, currConfig):
     """Paint a Fractal image into the TKinter PhotoImage canvas.
         Assumes the image is 1024x1024 pixels."""
 
-    __fractal = fractals[fileName]
+    fractal = configs[currConfig]  # store desired fractal into local variable
 
     # Correlate the boundaries of the PhotoImage object to the complex coordinates of the imaginary plane
-    pixMin = ((__fractal['centerX'] - (__fractal['axisLength'] / 2.0)),
-              (__fractal['centerY'] - (__fractal['axisLength'] / 2.0)))
+    pixMin = ((fractal['centerX'] - (fractal['axisLength'] / 2.0)),
+              (fractal['centerY'] - (fractal['axisLength'] / 2.0)))
 
-    pixMax = ((__fractal['centerX'] + (__fractal['axisLength'] / 2.0)),
-              (__fractal['centerY'] + (__fractal['axisLength'] / 2.0)))
+    pixMax = ((fractal['centerX'] + (fractal['axisLength'] / 2.0)),
+              (fractal['centerY'] + (fractal['axisLength'] / 2.0)))
 
-    # Display the image on the screen
-    canvas = Canvas(__window, width=1024, height=1024, bg=__gradient[0])
+    # Display the image onto the screen
+    canvas = Canvas(__window, width=__MAXPIXAMOUNT, height=__MAXPIXAMOUNT, bg=GRADIENT[0])
     canvas.pack()
-    canvas.create_image((512, 512), image=__image, state="normal")
+    canvas.create_image((__MAXPIXAMOUNT / 2, __MAXPIXAMOUNT / 2), image=__image, state="normal")
 
-    # At this scale, how much length and height of the
-    # imaginary plane does one pixel cover?
-    pixSize = abs(pixMax[0] - pixMin[0]) / 1024.0
+    # calculates the length and height of one pixel on the imaginary plane
+    pixSize = abs(pixMax[0] - pixMin[0]) / __MAXPIXAMOUNT
 
-    for row in range(1024, 0, -1):
-        for col in range(1024):
+    # generate fractal image by row and column bounded by the limits
+    for row in range(__MAXPIXAMOUNT, 0, -1):
+        for col in range(__MAXPIXAMOUNT):
             x = pixMin[0] + col * pixSize
             y = pixMin[1] + row * pixSize
 
-            index = getMandelIndex(complex(__fractal['creal'], __fractal['cimag']), complex(x, y), __gradient)
-            grad = getColor(index)
+            # get the Mandel index first
+            index = getMandelIndex(complex(fractal['creal'], fractal['cimag']), complex(x, y), GRADIENT)
 
-            if __fractal['type'] == "julia":
-                index = getJuliaColorIndex(complex(x, y), complex(__fractal['creal'], __fractal['cimag']), __gradient)
-                grad = getColor(index)
+            # if it is a julia set then replace the index value with the julia index value
+            if fractal['type'] == "julia":
+                index = getJuliaColorIndex(complex(x, y), complex(fractal['creal'], fractal['cimag']), GRADIENT)
 
-            __image.put(grad, (col, 1024 - row))
+            grad = GRADIENT[index]  # get the color of the final index value from gradient
 
-        __window.update()
+            __image.put(grad, (col, __MAXPIXAMOUNT - row))
+
+        __window.update()  # display the current row of pixels
 
 
 def save(fileName):
-    # Output the Fractal into a .png image
+    """Saves a Fractal image as a .png image under given filename."""
+
     __image.write(fileName + ".png")
     print("Wrote picture " + fileName + ".png")
 

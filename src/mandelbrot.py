@@ -1,12 +1,8 @@
 #!/bin/env python3
 
-def pixelsWrittenSoFar(rows, cols):
-    pixels = rows * cols
-    print(f"{pixels} pixels have been output so far")
-
 
 def getMandelIndex(pixel, constant, gradient):
-    """Return the index of the color of the current pixel within the Julia set
+    """Return the index of the color of the current pixel within the Mandelbrot set
     in the gradient array"""
 
     gradLength = len(gradient)

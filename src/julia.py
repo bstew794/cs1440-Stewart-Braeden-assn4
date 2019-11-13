@@ -3,14 +3,6 @@
 # Julia Set Visualizer
 
 
-# This dictionary contains the different views of the Julia set you can make
-# with this program.
-#
-# For convenience I have placed these into a dictionary so you may easily
-# switch between them by entering the name of the image you want to generate
-# into the variable 'i'.
-
-
 def getJuliaColorIndex(pixel, constant, gradient):
     """Return the index of the color of the current pixel within the Julia set
     in the gradient array"""

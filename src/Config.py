@@ -1,12 +1,13 @@
 #!/bin/env python3
 
-configs = {
+# This dictionary contains the different views of both sets that you can make in this program
+CONFIGS = {
     'fulljulia': {
         'centerX': 0.0,
         'centerY': 0.0,
         'axisLength': 4.0,
-        'type': 'julia',
-        'creal': -1.0,
+        'type': 'julia',  # The type tells us which algorithm to use
+        'creal': -1.0,  # 'creal' and 'cimag' provide the values that are used later for complex values in ImagePainter
         'cimag': 0.0,
     },
 
@@ -82,11 +83,3 @@ configs = {
         'cimag': 0.0,
     },
 }
-
-
-def getImages():
-    return configs
-
-
-def getImage(name):
-    return configs[name]
