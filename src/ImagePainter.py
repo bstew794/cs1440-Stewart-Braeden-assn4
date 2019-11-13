@@ -1,33 +1,30 @@
 #!/bin/env python3
-from tkinter import Tk, Canvas, PhotoImage, mainloop
-from Gradient import getGradChart, getColor
-from Config import getFractals
+from tkinter import Tk, Canvas, mainloop, PhotoImage
+from Gradient import getGradChart, getColor, __gradient
 from julia import getJuliaColorIndex
 from mandelbrot import getMandelIndex
 
-__image = PhotoImage(width=1024, height=1024)
 __window = Tk()
+__image = PhotoImage(width=1024, height=1024)
 
 
-def paint(fractal):
+def paint(fractals, fileName):
     """Paint a Fractal image into the TKinter PhotoImage canvas.
         Assumes the image is 1024x1024 pixels."""
 
-    # Correlate the boundaries of the PhotoImage object to the complex coordinates of the imaginary plane
-    pixMin = ((fractal['centerX'] - (fractal['axisLength'] / 2.0)),
-              (fractal['centerY'] - (fractal['axisLength'] / 2.0)))
+    __fractal = fractals[fileName]
 
-    pixMax = ((fractal['centerX'] + (fractal['axisLength'] / 2.0)),
-              (fractal['centerY'] + (fractal['axisLength'] / 2.0)))
+    # Correlate the boundaries of the PhotoImage object to the complex coordinates of the imaginary plane
+    pixMin = ((__fractal['centerX'] - (__fractal['axisLength'] / 2.0)),
+              (__fractal['centerY'] - (__fractal['axisLength'] / 2.0)))
+
+    pixMax = ((__fractal['centerX'] + (__fractal['axisLength'] / 2.0)),
+              (__fractal['centerY'] + (__fractal['axisLength'] / 2.0)))
 
     # Display the image on the screen
-    canvas = Canvas(__window, width=1024, height=1024, bg=getGradChart()[0])
+    canvas = Canvas(__window, width=1024, height=1024, bg=__gradient[0])
     canvas.pack()
-    # TODO: Sometimes I wonder whether some of my functions are trying to do
-    #       too many different things... this is the correct part of the
-    #       program to create a GUI window, right?
     canvas.create_image((512, 512), image=__image, state="normal")
-    canvas.pack()
 
     # At this scale, how much length and height of the
     # imaginary plane does one pixel cover?
@@ -38,12 +35,11 @@ def paint(fractal):
             x = pixMin[0] + col * pixSize
             y = pixMin[1] + row * pixSize
 
-            if ['type'] == "julia":
-                index = getJuliaColorIndex(complex(x, y), complex(fractal['creal'], fractal['cimag']), getGradChart)
-                grad = getColor(index)
+            index = getMandelIndex(complex(__fractal['creal'], __fractal['cimag']), complex(x, y), __gradient)
+            grad = getColor(index)
 
-            else:
-                index = getMandelIndex(complex(fractal['creal'], fractal['cimag']), complex(x, y), getGradChart)
+            if __fractal['type'] == "julia":
+                index = getJuliaColorIndex(complex(x, y), complex(__fractal['creal'], __fractal['cimag']), __gradient)
                 grad = getColor(index)
 
             __image.put(grad, (col, 1024 - row))

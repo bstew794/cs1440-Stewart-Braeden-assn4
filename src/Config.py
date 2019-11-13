@@ -1,6 +1,6 @@
 #!/bin/env python3
 
-__FRACTALS = {
+configs = {
     'fulljulia': {
         'centerX': 0.0,
         'centerY': 0.0,
@@ -84,5 +84,9 @@ __FRACTALS = {
 }
 
 
-def getFractals():
-    return __FRACTALS
+def getImages():
+    return configs
+
+
+def getImage(name):
+    return configs[name]

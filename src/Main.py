@@ -1,23 +1,24 @@
 #!/bin/env python3
 
 import sys
-from GUI import UserInterface
-
-
-def driver(args):
+from ImagePainter import save, paint
+from Config import getImages
 
 if len(sys.argv) < 2:
     print("Please provide the name of a fractal as an argument")
-    for i in fractals:
+    print("Please choose one of the following:")
+    for i in getImages():
         print(f"\t{i}")
     sys.exit(1)
 
-elif sys.argv[1] not in fractals:
+elif sys.argv[1] not in getImages():
     print(f"ERROR: {sys.argv[1]} is not a valid fractal")
     print("Please choose one of the following:")
-    for i in fractals:
+    for i in getImages():
         print(f"\t{i}")
     sys.exit(1)
 
 else:
-    image = sys.argv[1]
+    paint(getImages(), sys.argv[1])
+    save(sys.argv[1])
+    sys.exit()
