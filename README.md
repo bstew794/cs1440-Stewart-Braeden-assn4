@@ -1,4 +1,7 @@
-# Project description 
+# Project description
+
+Here is the UML diagram: [doc/FractalsUML.png](doc/FractalsUML.png)
+Here is the user manual: [doc/UserManual.md](doc/UserManual.md)
 
 Our firm has been contracted to help a mathematician take his amazing
 one-million dollar idea to market.  Our client specializes in the field of
