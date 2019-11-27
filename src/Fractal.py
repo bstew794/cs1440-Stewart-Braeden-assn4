@@ -8,6 +8,9 @@ class Fractal:
     def count(self, complexNum):
         raise NotImplementedError("Concrete subclass of Fractal must implement count() method")
 
+    def getFormat(self, lines):
+        raise NotImplementedError("Concrete subclass of Fractal must implement getFormat() method")
+
 
 class Julia(Fractal):
     def __init__(self, cReal=None, cImag=None, pixels=None, centerX=None, centerY=None, axisLength=None, iterations=None):
@@ -27,7 +30,7 @@ class Julia(Fractal):
             complexNum = complexNum * complexNum + constant
 
             if abs(complexNum) > 2.0:
-                return i
+                return i - 1
 
             i += 1
 
@@ -119,11 +122,11 @@ class Mandelbrot(Fractal):
             constant = constant * constant + complexNum
 
             if abs(constant) > 2.0:
-                return i
+                return i - 1
 
             i += 1
 
-        return self.iterations
+        return self.iterations - 1
 
     def getFormat(self, lines):
         for line in lines:
@@ -191,11 +194,11 @@ class Mandelbrot3(Fractal):
             constant = (constant * constant * constant) + complexNum
 
             if abs(constant) > 2.0:
-                return i
+                return i - 1
 
             i += 1
 
-        return self.iterations
+        return self.iterations - 1
 
     def getFormat(self, lines):
         for line in lines:
