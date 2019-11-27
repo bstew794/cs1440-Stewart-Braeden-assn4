@@ -37,45 +37,45 @@ class Julia(Fractal):
         for line in lines:
             line = line.split(":")
 
-            if line[0] == "creal":
+            if line[0].lower() == "creal":
                 try:
                     self.cReal = float(line[1].strip())
 
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "cimag":
+            elif line[0].lower() == "cimag":
                 try:
                     self.cImag = float(line[1].strip())
 
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "pixels":
+            elif line[0].lower() == "pixels":
                 try:
                     self.pixels = int(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "centerx":
+            elif line[0].lower() == "centerx":
                 try:
                     self.centerX = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "centery":
+            elif line[0].lower() == "centery":
                 try:
                     self.centerY = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "axislength":
+            elif line[0].lower() == "axislength":
                 try:
                     self.axisLength = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "iterations":
+            elif line[0].lower() == "iterations":
                 try:
                     self.iterations = float(line[1].strip())
                 except ValueError:
@@ -129,31 +129,31 @@ class Mandelbrot(Fractal):
         for line in lines:
             line = line.split(":")
 
-            if line[0] == "pixels":
+            if line[0].lower() == "pixels":
                 try:
                     self.pixels = int(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "centerx":
+            elif line[0].lower() == "centerx":
                 try:
                     self.centerX = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "centery":
+            elif line[0].lower() == "centery":
                 try:
                     self.centerY = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "axislength":
+            elif line[0].lower() == "axislength":
                 try:
                     self.axisLength = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "iterations":
+            elif line[0].lower() == "iterations":
                 try:
                     self.iterations = float(line[1].strip())
                 except ValueError:
@@ -201,31 +201,31 @@ class Mandelbrot3(Fractal):
         for line in lines:
             line = line.split(":")
 
-            if line[0] == "pixels":
+            if line[0].lower() == "pixels":
                 try:
                     self.pixels = int(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "centerx":
+            elif line[0].lower() == "centerx":
                 try:
                     self.centerX = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "centery":
+            elif line[0].lower() == "centery":
                 try:
                     self.centerY = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "axislength":
+            elif line[0].lower() == "axislength":
                 try:
                     self.axisLength = float(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
-            elif line[0] == "iterations":
+            elif line[0].lower() == "iterations":
                 try:
                     self.iterations = float(line[1].strip())
                 except ValueError:

@@ -14,26 +14,23 @@ def makeFractal(filename):
     for line in lines:
         line = line.split(":")
 
-        if line[0].strip() == "type":
-            thisType = line[1].strip()
+        if line[0].strip().lower() == "type":
+            thisType = line[1].strip().lower()
 
             if thisType == "julia":
                 fractal = Julia()
                 i += 1
                 fractal.getFormat(lines[i:])
-                return fractal
 
             elif thisType == "mandelbrot":
                 fractal = Mandelbrot()
                 i += 1
                 fractal.getFormat(lines[i:])
-                return fractal
 
             elif thisType == "mandelbrot3":
                 fractal = Mandelbrot3()
                 i += 1
                 fractal.getFormat(lines[i:])
-                return fractal
 
             else:
                 raise NotImplementedError("Hey! We don't serve their kind here! Your droids; they'll have to wait "
@@ -41,4 +38,4 @@ def makeFractal(filename):
 
         i += 1
 
-    return None
+    return fractal
