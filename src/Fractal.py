@@ -31,7 +31,7 @@ class Julia(Fractal):
 
             i += 1
 
-        return self.iterations
+        return self.iterations - 1
 
     def getFormat(self, lines):
         for line in lines:
@@ -77,7 +77,7 @@ class Julia(Fractal):
 
             elif line[0].lower() == "iterations":
                 try:
-                    self.iterations = float(line[1].strip())
+                    self.iterations = int(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
@@ -155,7 +155,7 @@ class Mandelbrot(Fractal):
 
             elif line[0].lower() == "iterations":
                 try:
-                    self.iterations = float(line[1].strip())
+                    self.iterations = int(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 
@@ -227,7 +227,7 @@ class Mandelbrot3(Fractal):
 
             elif line[0].lower() == "iterations":
                 try:
-                    self.iterations = float(line[1].strip())
+                    self.iterations = int(line[1].strip())
                 except ValueError:
                     raise NotImplementedError("Incorrect format in fractal configuration file")
 

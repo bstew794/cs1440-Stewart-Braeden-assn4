@@ -22,8 +22,8 @@ class Christmas:
 
 class BoyScout:
     def __init__(self, iterations):
-        red = Color("blue")
-        self.gradients = list(red.range_to(Color("yellow"), iterations))
+        blue = Color("blue")
+        self.gradients = list(blue.range_to(Color("yellow"), iterations))
 
     def getColor(self, integer):
         return self.gradients[integer].get_hex_l()
@@ -31,8 +31,8 @@ class BoyScout:
 
 class Spoopy:
     def __init__(self, iterations):
-        red = Color("orange")
-        self.gradients = list(red.range_to(Color("purple"), iterations))
+        orange = Color("orange")
+        self.gradients = list(orange.range_to(Color("purple"), iterations))
 
     def getColor(self, integer):
         return self.gradients[integer].get_hex_l()
